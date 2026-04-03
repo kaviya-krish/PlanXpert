@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voyara — Travel Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="bg-canvas">
+    <div class="mesh mesh-1"></div>
+    <div class="mesh mesh-2"></div>
+    <div class="mesh mesh-3"></div>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">✈</div>
+      <div class="logo-text">
+        <span class="logo-v">P</span><span class="logo-rest">lan<span class="logo-v">X</span>pert</span>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-tab="destinations">
+        <span>🗺️</span> Destinations
+      </button>
+      <button class="nav-btn" data-tab="budget">
+        <span>💰</span> Budget
+      </button>
+      <button class="nav-btn" data-tab="itinerary">
+        <span>📅</span> Itinerary
+      </button>
+    </nav>
+
+    <input type="text" id="tripName" class="trip-input" placeholder="✏ Name your trip..." value="My Dream Trip"/>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- ════ DESTINATIONS ════ -->
+    <section class="tab-pane active" id="tab-destinations">
+      <div class="page-top">
+        <div>
+          <h1 class="page-title">Your <em>Destinations</em></h1>
+          <p class="page-sub">Discover. Plan. Travel.</p>
+        </div>
+        <div class="page-icon">🌍</div>
+      </div>
+
+      <div class="split-layout">
+        <!-- Form -->
+        <div class="side-card" id="destFormCard">
+          <div class="card-head"><span class="dot"></span> ADD DESTINATION</div>
+
+          <label class="lbl">City / Country</label>
+          <input type="text" id="destCity" class="inp" placeholder="e.g. Kyoto, Japan"/>
+
+          <div class="date-row">
+            <div class="date-col">
+              <label class="lbl">Arrival</label>
+              <input type="date" id="destArrival" class="inp"/>
+            </div>
+            <div class="date-col">
+              <label class="lbl">Departure</label>
+              <input type="date" id="destDeparture" class="inp"/>
+            </div>
+          </div>
+
+          <label class="lbl">Vibe</label>
+          <div class="vibe-grid">
+            <button class="vchip active" data-vibe="🏝 Beach">🏝 Beach</button>
+            <button class="vchip" data-vibe="🏔 Mountain">🏔 Mountain</button>
+            <button class="vchip" data-vibe="🏛 Culture">🏛 Culture</button>
+            <button class="vchip" data-vibe="🍜 Food">🍜 Food</button>
+            <button class="vchip" data-vibe="🌆 City">🌆 City</button>
+            <button class="vchip" data-vibe="🌿 Nature">🌿 Nature</button>
+          </div>
+
+          <label class="lbl">Notes</label>
+          <textarea id="destNotes" class="inp inp-ta" placeholder="Must-see spots, tips..."></textarea>
+
+          <button class="primary-btn" id="addDestBtn">＋ Add Destination</button>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="cards-grid" id="destinationsGrid"></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat"><span class="snum" id="statDests">0</span><span class="slbl">Destinations</span></div>
+        <div class="sdiv"></div>
+        <div class="stat"><span class="snum" id="statDays">0</span><span class="slbl">Nights</span></div>
+        <div class="sdiv"></div>
+        <div class="stat"><span class="snum" id="statBudget">₹0</span><span class="slbl">Budget</span></div>
+      </div>
+    </section>
+
+    <!-- ════ BUDGET ════ -->
+    <section class="tab-pane" id="tab-budget">
+      <div class="page-top">
+        <div>
+          <h1 class="page-title">Budget <em>Tracker</em></h1>
+          <p class="page-sub">Budget smart, travel smarter.</p>
+        </div>
+        <div class="page-icon">💸</div>
+      </div>
+
+      <div class="split-layout">
+        <!-- Form -->
+        <div class="side-card">
+          <div class="card-head"><span class="dot"></span> ADD EXPENSE</div>
+
+          <label class="lbl">Description</label>
+          <input type="text" id="expDesc" class="inp" placeholder="e.g. Flight to Bali"/>
+
+          <div class="row-2">
+            <div>
+              <label class="lbl">Amount (₹)</label>
+              <input type="number" id="expAmount" class="inp" placeholder="0"/>
+            </div>
+            <div>
+              <label class="lbl">Category</label>
+              <select id="expCategory" class="inp inp-sel">
+                <option value="✈️ Flights">✈️ Flights</option>
+                <option value="🏨 Hotels">🏨 Hotels</option>
+                <option value="🚌 Transport">🚌 Transport</option>
+                <option value="🍽 Food">🍽 Food</option>
+                <option value="🎭 Activities">🎭 Activities</option>
+                <option value="🛍 Shopping">🛍 Shopping</option>
+                <option value="🏥 Insurance">🏥 Insurance</option>
+                <option value="📦 Misc">📦 Misc</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div>
+              <label class="lbl">Destination</label>
+              <select id="expDest" class="inp inp-sel">
+                <option value="General">General</option>
+              </select>
+            </div>
+            <div>
+              <label class="lbl">Type</label>
+              <div class="tog-wrap">
+                <button class="tog active" data-type="planned">Planned</button>
+                <button class="tog" data-type="actual">Actual</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="primary-btn" id="addExpenseBtn">＋ Add Expense</button>
+
+          <div class="bsum">
+            <div class="bsum-row"><span>Planned</span><span class="bval pval" id="totalPlanned">₹0</span></div>
+            <div class="bsum-row"><span>Actual</span><span class="bval aval" id="totalActual">₹0</span></div>
+            <div class="bsum-line"></div>
+            <div class="bsum-row"><span class="bsum-bal-lbl">Balance</span><span class="bval" id="totalBalance">₹0</span></div>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="budget-right">
+          <div class="side-card">
+            <div class="card-head"><span class="dot"></span> SPEND BY CATEGORY</div>
+            <div class="donut-flex">
+              <canvas id="budgetChart" width="200" height="200"></canvas>
+              <div id="chartLegend" class="chart-legend"></div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <div class="card-head"><span class="dot"></span> ALL EXPENSES</div>
+            <div id="expensesList" class="exp-list">
+              <div class="empty-hint"><span>💸</span><p>No expenses yet</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ ITINERARY ════ -->
+    <section class="tab-pane" id="tab-itinerary">
+      <div class="page-top">
+        <div>
+          <h1 class="page-title">Day-wise <em>Itinerary</em></h1>
+          <p class="page-sub">Map every moment of your journey</p>
+        </div>
+        <div class="page-icon">🗓️</div>
+      </div>
+
+      <div class="day-bar">
+        <div class="day-tabs" id="daySelector"></div>
+        <button class="outline-btn" id="addDayBtn">＋ Add Day</button>
+      </div>
+
+      <div class="itin-body" id="itineraryContent">
+        <div class="big-empty">
+          <span style="font-size:3rem">📍</span>
+          <p>Add destinations with dates to generate days</p>
+          <button class="ghost-btn" onclick="switchTab('destinations')">Go to Destinations →</button>
+        </div>
+      </div>
+
+      <div class="side-card act-form" id="activityForm" style="display:none;">
+        <div class="card-head"><span class="dot"></span> ADD ACTIVITY</div>
+        <div class="act-grid">
+          <div>
+            <label class="lbl">Time</label>
+            <input type="time" id="actTime" class="inp" value="09:00"/>
+          </div>
+          <div class="span2">
+            <label class="lbl">Activity Name</label>
+            <input type="text" id="actTitle" class="inp" placeholder="e.g. Visit Fushimi Inari"/>
+          </div>
+          <div>
+            <label class="lbl">Type</label>
+            <select id="actType" class="inp inp-sel">
+              <option>🍽 Meal</option>
+              <option>🏛 Sightseeing</option>
+              <option>🚌 Travel</option>
+              <option>🛏 Check-in</option>
+              <option>🎭 Activity</option>
+              <option>🛍 Shopping</option>
+              <option>📷 Photography</option>
+              <option>💆 Leisure</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl">Duration (hrs)</label>
+            <input type="number" id="actDuration" class="inp" placeholder="1" step="0.5" min="0.5"/>
+          </div>
+          <div class="span3">
+            <label class="lbl">Notes / Address</label>
+            <input type="text" id="actNotes" class="inp" placeholder="Address, booking ref, tips..."/>
+          </div>
+        </div>
+        <button class="primary-btn act-btn" id="addActivityBtn">＋ Add Activity</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
